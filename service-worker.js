@@ -1,4 +1,4 @@
-const CACHE_NAME = "v4";
+const CACHE_NAME = "v5";
 
 // Detectar automáticamente el path base (ej: /jalvarezmolina/)
 const BASE_PATH = self.location.pathname.replace(/service-worker\.js$/, "");
@@ -8,8 +8,7 @@ const FILES_TO_CACHE = [
   `${BASE_PATH}index.html`,
   `${BASE_PATH}style.css`,
   `${BASE_PATH}manifest.json`,
-  `${BASE_PATH}assets/icons/app-icon-192.png`,
-  `${BASE_PATH}assets/icons/app-icon-512.png`
+  `${BASE_PATH}assets/icons/app-icon-192.png`
 ];
 
 self.addEventListener("install", event => {
@@ -37,3 +36,4 @@ self.addEventListener("fetch", event => {
     })
   );
 });
+
