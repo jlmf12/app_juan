@@ -1,0 +1,225 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #ffffff;
+  color: #ffffff;
+}
+
+.page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 2rem;
+}
+
+/* CABECERA BLANCA CON LOGO */
+.header {
+  text-align: center;
+  margin-bottom: 0.8rem;
+}
+
+.logo-jam {
+  width: 80px;
+}
+
+/* TARJETA AZUL CENTRAL */
+.card {
+  background: #0082e6;
+  border-radius: 22px;
+  padding: 2rem 1.5rem 1.8rem;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+}
+
+.perfil {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.nombre {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.ubicacion {
+  margin-top: 0.25rem;
+  opacity: 0.9;
+}
+
+.descripcion {
+  margin-top: 0.7rem;
+  margin-bottom: 1.4rem;
+}
+
+/* SERVICIOS */
+.servicios {
+  text-align: left;
+  margin-bottom: 1.8rem;
+}
+
+.servicios h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.9rem;
+}
+
+.servicio-item {
+  display: flex;
+  gap: 0.8rem;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 0.9rem;
+  border-radius: 14px;
+  margin-bottom: 0.75rem;
+}
+
+.servicio-icono {
+  font-size: 1.6rem;
+}
+
+.servicio-item h3 {
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.servicio-item p {
+  font-size: 0.9rem;
+}
+
+.contacta-label {
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+/* BOTONES CONTACTO */
+.contacto {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-bottom: 1.6rem;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0.9rem;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.96rem;
+  transition: 0.18s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+/* Colores de botones */
+.btn-web { background: #005bb5; }
+.btn-email { background: #111111; }
+.btn-whatsapp { background: #25D366; }
+.btn-linktree { background: #9333EA; }
+
+/* NUEVO BOTÓN FORMULARIO (NARANJA) */
+.btn-formulario {
+  background: #ff7a00;
+}
+
+.btn-formulario:hover {
+  filter: brightness(1.08);
+}
+
+/* Iconos dentro de botones */
+.icon {
+  width: 22px;
+  height: 22px;
+}
+
+/* REDES SOCIALES */
+.social {
+  text-align: center;
+}
+
+.social-label {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 0.7rem;
+}
+
+.social-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.18s ease;
+}
+
+.social-icon:hover {
+  background: rgba(255, 255, 255, 0.26);
+  transform: scale(1.08);
+}
+
+.icon-social {
+  width: 26px;
+  height: 26px;
+}
+
+/* COPYRIGHT */
+.footer {
+  margin-top: 1.4rem;
+  font-size: 0.84rem;
+  opacity: 0.9;
+}
+
+/* BOTÓN INSTALAR */
+.install-inline {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.btn-install {
+  background: #0082e6;
+  color: #ffffff;
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  animation: parpadeo 1.2s infinite;
+  transition: 0.2s ease;
+}
+
+.btn-install:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-install:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+/* Animación parpadeo */
+@keyframes parpadeo {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

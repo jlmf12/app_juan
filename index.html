@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juan Álvarez Molina · JAM</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0082e6">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- LOGO SUPERIOR SOBRE FONDO BLANCO -->
+    <header class="header">
+      <img src="assets/logo.png" alt="Logo JAM" class="logo-jam">
+    </header>
+
+    <!-- TARJETA AZUL CENTRAL -->
+    <main class="card">
+
+      <!-- FOTO -->
+      <img src="assets/perfil.jpg" alt="Foto de perfil" class="perfil">
+
+      <!-- NOMBRE Y DESCRIPCIÓN -->
+      <h1 class="nombre">Juan Álvarez Molina</h1>
+      <p class="ubicacion">📍 Las Rozas de Madrid - Madrid</p>
+      <p class="descripcion">Clases particulares de informática a domicilio y online.</p>
+
+      <!-- SERVICIOS -->
+      <section class="servicios">
+        <h2>Servicios</h2>
+
+        <!-- BOTÓN INSTALAR APP (SIEMPRE VISIBLE) -->
+        <div class="install-inline">
+          <button id="installBtn" class="btn btn-install" disabled>
+            Instalar app
+          </button>
+        </div>
+
+        <div class="servicio-item">
+          <div class="servicio-icono">🏠</div>
+          <div>
+            <h3>Clases de informática a domicilio</h3>
+            <p>Te ofrezco una experiencia personalizada en tu hogar.</p>
+          </div>
+        </div>
+
+        <div class="servicio-item">
+          <div class="servicio-icono">💻</div>
+          <div>
+            <h3>Clases online</h3>
+            <p>Flexibilidad total desde cualquier lugar.</p>
+          </div>
+        </div>
+
+        <p class="contacta-label">Contacta conmigo</p>
+      </section>
+
+      <!-- BOTONES DE CONTACTO -->
+      <section class="contacto">
+
+        <!-- NUEVO BOTÓN FORMULARIO DE CONTACTO -->
+        <a href="https://form.jotform.com/jalvarezmolina/form" class="btn btn-formulario" target="_blank">
+          <img src="assets/icons/icon-form.svg" class="icon" alt=""> Formulario de contacto
+        </a>
+
+        <a href="https://jam2026.wixsite.com/juan" class="btn btn-web" target="_blank">
+          <img src="assets/icons/icon-web.svg" class="icon" alt=""> Web personal
+        </a>
+
+        <a href="mailto:alvarezmolinajuan@gmail.com" class="btn btn-email">
+          <img src="assets/icons/icon-email.svg" class="icon" alt=""> Correo
+        </a>
+
+        <a href="https://wa.me/34609777478" class="btn btn-whatsapp" target="_blank">
+          <img src="assets/icons/icon-whatsapp.svg" class="icon" alt=""> WhatsApp
+        </a>
+
+        <a href="https://linktr.ee/juanalvarezmolina" class="btn btn-linktree" target="_blank">
+          <img src="assets/icons/icon-linktree.svg" class="icon" alt=""> Linktree
+        </a>
+
+      </section>
+
+      <!-- REDES SOCIALES -->
+      <section class="social">
+        <p class="social-label">Sígueme en redes sociales:</p>
+
+        <div class="social-icons">
+          <a href="https://www.facebook.com/informatica.clases.particulares" class="social-icon" target="_blank">
+            <img src="assets/icons/icon-facebook.svg" class="icon-social" alt="Facebook">
+          </a>
+
+          <a href="https://x.com/jalvarezmolina" class="social-icon" target="_blank">
+            <img src="assets/icons/icon-x.svg" class="icon-social" alt="X">
+          </a>
+
+          <a href="https://www.tiktok.com/@juan_alvarez_molina" class="social-icon" target="_blank">
+            <img src="assets/icons/icon-tiktok.svg" class="icon-social" alt="TikTok">
+          </a>
+        </div>
+      </section>
+
+      <!-- COPYRIGHT -->
+      <footer class="footer">
+        © 2026 Juan Álvarez Molina. Todos los derechos reservados.
+      </footer>
+
+    </main>
+
+  </div>
+
+  <!-- REGISTRO DEL SERVICE WORKER + BOTÓN INSTALAR -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/service-worker.js");
+    }
+
+    let deferredPrompt;
+    const installBtn = document.getElementById("installBtn");
+
+    // Detectar iOS y Safari
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    // Detectar si la app está instalada
+    function checkIfInstalled() {
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        installBtn.disabled = true;
+        installBtn.textContent = "App ya instalada";
+        return true;
+      }
+      return false;
+    }
+
+    // Ejecutar al cargar
+    if (checkIfInstalled()) {
+      // Ya instalada → no hacemos nada más
+    } else if (isIOS && isSafari) {
+      installBtn.disabled = true;
+      installBtn.textContent = "Añadir desde el menú Compartir";
+    }
+
+    // Android / Chrome: permitir instalación
+    window.addEventListener("beforeinstallprompt", (e) => {
+      if (checkIfInstalled()) return;
+
+      if (isIOS && isSafari) return;
+
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.disabled = false;
+      installBtn.textContent = "Instalar app";
+    });
+
+    // Pulsar botón
+    installBtn.addEventListener("click", async () => {
+      if (checkIfInstalled()) return;
+
+      if (isIOS && isSafari) {
+        installBtn.disabled = true;
+        installBtn.textContent = "Añadir desde el menú Compartir";
+        return;
+      }
+
+      if (!deferredPrompt) {
+        installBtn.disabled = true;
+        installBtn.textContent = "App no disponible. Inténtalo más tarde";
+        return;
+      }
+
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+
+      installBtn.disabled = true;
+      installBtn.textContent = "Instalación finalizada";
+
+      deferredPrompt = null;
+    });
+
+    window.addEventListener("appinstalled", () => {
+      installBtn.disabled = true;
+      installBtn.textContent = "Instalación finalizada";
+    });
+  </script>
+
+</body>
+</html>
