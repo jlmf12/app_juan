@@ -1,15 +1,17 @@
-const CACHE_NAME = "v2"; // súbelo como v2 para forzar actualización
+const CACHE_NAME = "v3";
+
+// Detectar automáticamente el path base (ej: /jalvarezmolina/)
+const BASE_PATH = self.location.pathname.replace(/service-worker\.js$/, "");
+
 const FILES_TO_CACHE = [
-  "./",
-  "./index.html",
-  "./style.css",
-  "./manifest.json",
-  "./service-worker.js",
-  "./assets/icon-192.png",
-  "./assets/icon-512.png"
+  `${BASE_PATH}`,
+  `${BASE_PATH}index.html`,
+  `${BASE_PATH}style.css`,
+  `${BASE_PATH}manifest.json`,
+  `${BASE_PATH}assets/icon-192.png`,
+  `${BASE_PATH}assets/icon-512.png`
 ];
 
-// Instalar y cachear archivos
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(FILES_TO_CACHE))
@@ -17,21 +19,17 @@ self.addEventListener("install", event => {
   self.skipWaiting();
 });
 
-// Activar y limpiar cachés antiguas
 self.addEventListener("activate", event => {
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
-        keys
-          .filter(key => key !== CACHE_NAME)
-          .map(key => caches.delete(key))
+        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
       )
     )
   );
   return self.clients.claim();
 });
 
-// Servir desde caché con fallback a red
 self.addEventListener("fetch", event => {
   event.respondWith(
     caches.match(event.request).then(response => {
