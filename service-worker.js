@@ -1,12 +1,12 @@
-const CACHE_NAME = "v1"; // Cambia a v2, v3... cuando actualices
+const CACHE_NAME = "v2"; // súbelo como v2 para forzar actualización
 const FILES_TO_CACHE = [
-  "/jalvarezmolina/",
-  "/jalvarezmolina/index.html",
-  "/jalvarezmolina/style.css",
-  "/jalvarezmolina/manifest.json",
-  "/jalvarezmolina/service-worker.js",
-  "/jalvarezmolina/assets/icon-192.png",
-  "/jalvarezmolina/assets/icon-512.png"
+  "./",
+  "./index.html",
+  "./style.css",
+  "./manifest.json",
+  "./service-worker.js",
+  "./assets/icon-192.png",
+  "./assets/icon-512.png"
 ];
 
 // Instalar y cachear archivos
